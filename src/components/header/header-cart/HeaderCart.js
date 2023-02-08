@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
 import React from "react";
 
-export const Cart = () => {
+export const HeaderCart = () => {
   return (
     <span className={styles.cart}>
       <Link to="/cart">
