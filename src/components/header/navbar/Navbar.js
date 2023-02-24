@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styles from "../header.module.scss";
 import Logo from "../logo";
-import { AdminOnlyRoute } from "../../../components";
+import { AdminOnlyLink } from "../../../components";
 import { FaTimes, FaUserCircle } from "react-icons/fa";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import HeaderCart from "../header-cart";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../../../firebase/config";
@@ -77,9 +77,11 @@ export const Navbar = ({ showMenu, hideMenu }) => {
           <FaTimes size={22} color="#fff" onClick={hideMenu} />
         </li>
         <li>
-          <AdminOnlyRoute>
-            <button className="--btn --btn-primary">Admin</button>
-          </AdminOnlyRoute>
+          <AdminOnlyLink>
+            <Link to="/admin/home">
+              <button className="--btn --btn-primary">Admin</button>
+            </Link>
+          </AdminOnlyLink>
         </li>
         <li>
           <NavLink to="/" className={activeLink}>

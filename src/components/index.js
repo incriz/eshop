@@ -5,5 +5,15 @@ import Card from "./card";
 import Loader from "./loader";
 import Slider from "./slider";
 import AdminOnlyRoute from "./adminOnlyRoute";
+import AdminOnlyLink from "./adminOnlyLink";
 
-export { Header, Footer, Layout, Card, Loader, Slider, AdminOnlyRoute };
+export {
+  Header,
+  Footer,
+  Layout,
+  Card,
+  Loader,
+  Slider,
+  AdminOnlyRoute,
+  AdminOnlyLink,
+};

@@ -1,7 +1,13 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import styles from "./Admin.module.scss";
-import { Home, Navbar } from "../../components/admin";
+import {
+  AddProduct,
+  Home,
+  Navbar,
+  Orders,
+  ViewProducts,
+} from "../../components/admin";
 
 export const Admin = () => {
   return (
@@ -12,6 +18,9 @@ export const Admin = () => {
       <div className={styles.content}>
         <Routes>
           <Route path="home" element={<Home />} />
+          <Route path="all-products" element={<ViewProducts />} />
+          <Route path="add-product" element={<AddProduct />} />
+          <Route path="orders" element={<Orders />} />
         </Routes>
       </div>
     </div>
