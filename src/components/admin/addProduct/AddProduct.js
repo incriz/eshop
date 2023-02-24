@@ -1,132 +1,207 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { addDoc, collection, Timestamp } from "firebase/firestore";
+import { db, storage } from "../../../firebase/config";
+import { Card, Loader } from "../../../components";
 import styles from "./addProducts.module.scss";
-import { Card } from "../../../components";
+import { toast } from "react-toastify";
 
 const categories = [
-  { id: 1, name: "Laptop" },
-  { id: 2, name: "Electronics" },
-  { id: 3, name: "Fashion" },
-  { id: 4, name: "Phone" },
+  { id: 1, name: "Ноутбук" },
+  { id: 2, name: "Телефон" },
+  { id: 3, name: "Системный блок" },
+  { id: 4, name: "Аксессуары" },
 ];
 
+const initialState = {
+  name: "",
+  imageURL: "",
+  price: 0,
+  category: "",
+  brand: "",
+  desc: "",
+};
+
 export const AddProduct = () => {
-  const [product, setProduct] = useState({
-    name: "",
-    imageURL: "",
-    price: "",
-    category: "",
-    brand: "",
-    desc: "",
-  });
+  const [product, setProduct] = useState({ ...initialState });
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [uploadProgress, setUploadProgress] = useState(0);
+
+  const navigate = useNavigate();
 
   const handleInputChange = e => {
     const { name, value } = e.target;
     setProduct({ ...product, [name]: value });
   };
-  const handleImageChange = e => {};
+  const handleImageChange = e => {
+    const file = e.target.files[0];
+    // console.log(file);
+
+    const storageRef = ref(storage, `eshop/${Date.now()}${file.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on(
+      "state_changed",
+      snapshot => {
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        setUploadProgress(progress);
+      },
+      error => {
+        toast.error(error.message);
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then(downloadURL => {
+          setProduct({ ...product, imageURL: downloadURL });
+          toast.success("Изоражение загружено");
+        });
+      }
+    );
+  };
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log(product);
+
+    setIsLoading(true);
+
+    try {
+      const docRef = addDoc(collection(db, "products"), {
+        name: product.name,
+        imageURL: product.imageURL,
+        price: Number(product.price),
+        category: product.category,
+        brand: product.brand,
+        desc: product.desc,
+        createdAt: Timestamp.now().toDate(),
+      });
+      setIsLoading(false);
+      setUploadProgress(0);
+      setProduct({ ...initialState });
+
+      navigate("/admin/all-products");
+
+      toast.success("Товар добавлен");
+    } catch (error) {
+      setIsLoading(false);
+      toast.error(error.message);
+    }
   };
 
   return (
-    <div className={styles.product}>
-      <h1>AddProducts</h1>
-      <Card cardClass={styles.card}>
-        <form onSubmit={handleSubmit}>
-          {/*NAME*/}
-          <label>Product name:</label>
-          <input
-            type="text"
-            placeholder="Product name"
-            name="name"
-            value={product.name}
-            required
-            onChange={e => handleInputChange(e)}
-          />
-
-          {/*IMAGE*/}
-          <label>Product image:</label>
-          <Card cardClass={styles.group}>
-            <div className={styles.progress}>
-              <div className={styles["progress-bar"]} style={{ width: "50%" }}>
-                Uploading 50%
-              </div>
-            </div>
-            <input
-              type="file"
-              accept="image/*"
-              placeholder="Product Image"
-              onChange={e => handleImageChange(e)}
-            />
+    <>
+      {isLoading && <Loader />}
+      <div className={styles.product}>
+        <h1>Добавление товара</h1>
+        <Card cardClass={styles.card}>
+          <form onSubmit={handleSubmit}>
+            {/*NAME*/}
+            <label>Наименование товара:</label>
             <input
               type="text"
-              //required
-              name="imageURL"
-              disabled
-              value={product.imageURL}
+              placeholder="Введите название"
+              name="name"
+              value={product.name}
+              required
+              onChange={e => handleInputChange(e)}
             />
-          </Card>
 
-          {/*PRICE*/}
-          <label>Product Price:</label>
-          <input
-            type="number"
-            placeholder="Product price"
-            name="price"
-            value={product.price}
-            required
-            onChange={e => handleInputChange(e)}
-          />
+            {/*IMAGE*/}
+            <label>Изображение товара:</label>
+            <Card cardClass={styles.group}>
+              {uploadProgress === 0 ? null : (
+                <div className={styles.progress}>
+                  <div
+                    className={styles["progress-bar"]}
+                    style={{ width: `${uploadProgress}%` }}
+                  >
+                    {uploadProgress < 100
+                      ? `Загрузка ${uploadProgress}`
+                      : `Загрузка завершена ${uploadProgress}%`}
+                  </div>
+                </div>
+              )}
 
-          {/*CATEGORY*/}
-          <label>Product Category:</label>
-          <select
-            required
-            name="category"
-            value={product.category}
-            onChange={e => handleInputChange(e)}
-          >
-            <option value="" disabled>
-              -- choose product category --
-            </option>
+              <input
+                type="file"
+                accept="image/*"
+                required
+                onChange={e => handleImageChange(e)}
+              />
 
-            {categories.map(cat => {
-              return (
-                <option key={cat.id} value={cat.name}>
-                  {cat.name}
-                </option>
-              );
-            })}
-          </select>
+              {product.imageURL === "" ? null : (
+                <input
+                  type="text"
+                  placeholder="image URL"
+                  //required
+                  name="imageURL"
+                  disabled
+                  value={product.imageURL}
+                />
+              )}
+            </Card>
 
-          {/*COMPANY/BRAND*/}
-          <label>Product Company/Brand:</label>
-          <input
-            type="text"
-            placeholder="Product brand"
-            name="brand"
-            value={product.brand}
-            required
-            onChange={e => handleInputChange(e)}
-          />
+            {/*PRICE*/}
+            <label>Цена товара:</label>
+            <input
+              type="number"
+              placeholder="Цена товара"
+              name="price"
+              value={product.price}
+              required
+              onChange={e => handleInputChange(e)}
+            />
 
-          {/*DESCRIPTION*/}
-          <label>Product Description:</label>
-          <textarea
-            name="desc"
-            id=""
-            cols="30"
-            rows="10"
-            value={product.desc}
-            required
-            onChange={e => handleInputChange(e)}
-          ></textarea>
+            {/*CATEGORY*/}
+            <label>Категория:</label>
+            <select
+              required
+              name="category"
+              value={product.category}
+              onChange={e => handleInputChange(e)}
+            >
+              <option value="" disabled>
+                -- выбрать категорию --
+              </option>
 
-          <button className="--btn --btn-primary">Save Product</button>
-        </form>
-      </Card>
-    </div>
+              {categories.map(cat => {
+                return (
+                  <option key={cat.id} value={cat.name}>
+                    {cat.name}
+                  </option>
+                );
+              })}
+            </select>
+
+            {/*COMPANY/BRAND*/}
+            <label>Бренд товара:</label>
+            <input
+              type="text"
+              placeholder="Введите название"
+              name="brand"
+              value={product.brand}
+              required
+              onChange={e => handleInputChange(e)}
+            />
+
+            {/*DESCRIPTION*/}
+            <label>Описание:</label>
+            <textarea
+              name="desc"
+              id=""
+              cols="30"
+              rows="10"
+              value={product.desc}
+              required
+              onChange={e => handleInputChange(e)}
+            ></textarea>
+
+            <button className="--btn --btn-primary">Сохранить</button>
+          </form>
+        </Card>
+      </div>
+    </>
   );
 };

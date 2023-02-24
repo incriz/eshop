@@ -12,6 +12,11 @@
       font-weight: 500;
     }
 
+    label:nth-of-type(3) {
+      padding-top: 1rem;
+    }
+
+
     input[type="text"],
     input[type="number"],
     input[type="file"],
