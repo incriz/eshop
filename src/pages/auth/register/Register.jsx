@@ -48,36 +48,36 @@ export const Register = () => {
       <section className={`container ${styles.auth}`}>
         <Card>
           <div className={styles.form}>
-            <h2>Register</h2>
+            <h2>Регистрация</h2>
             <form onSubmit={registerUser}>
               <input
                 type="email"
-                placeholder="email"
+                placeholder="введите почту"
                 required
                 value={email}
                 onChange={e => setEmail(e.target.value)}
               />
               <input
                 type="password"
-                placeholder="password"
+                placeholder="введите пароль"
                 required
                 value={password}
                 onChange={e => setPassword(e.target.value)}
               />
               <input
                 type="password"
-                placeholder="confirm password"
+                placeholder="подтвердите пароль"
                 required
                 value={cPassword}
                 onChange={e => setCPassword(e.target.value)}
               />
               <button type="submit" className="--btn --btn-primary --btn-block">
-                Register
+                Регистрация
               </button>
             </form>
             <span className={styles.register}>
-              <p>Already an account?</p>
-              <Link to="/login">Login</Link>
+              <p>У вас есть аккаунт?</p>
+              <Link to="/login">Войти</Link>
             </span>
           </div>
         </Card>

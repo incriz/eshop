@@ -19,22 +19,22 @@ export const Navbar = () => {
         <ul>
           <li>
             <NavLink to="/admin/home" className={activeLink}>
-              Home
+              Главная
             </NavLink>
           </li>
           <li>
             <NavLink to="/admin/all-products" className={activeLink}>
-              All Products
+              Все товары
             </NavLink>
           </li>
           <li>
-            <NavLink to="/admin/add-product" className={activeLink}>
-              Add Product
+            <NavLink to="/admin/add-product/ADD" className={activeLink}>
+              Добавить товар
             </NavLink>
           </li>
           <li>
             <NavLink to="/admin/orders" className={activeLink}>
-              Orders
+              Заказы
             </NavLink>
           </li>
         </ul>

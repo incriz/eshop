@@ -6,6 +6,8 @@ import Loader from "./loader";
 import Slider from "./slider";
 import AdminOnlyRoute from "./adminOnlyRoute";
 import AdminOnlyLink from "./adminOnlyLink";
+import { Product } from "./products";
+import Search from "./search";
 
 export {
   Header,
@@ -16,4 +18,6 @@ export {
   Slider,
   AdminOnlyRoute,
   AdminOnlyLink,
+  Product,
+  Search,
 };

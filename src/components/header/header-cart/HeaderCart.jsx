@@ -7,7 +7,7 @@ export const HeaderCart = () => {
   return (
     <span className={styles.cart}>
       <Link to="/cart">
-        Cart
+        Корзина
         <FaShoppingCart size={20} />
         <p>0</p>
       </Link>

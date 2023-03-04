@@ -1,8 +1,15 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import { addDoc, collection, Timestamp } from "firebase/firestore";
+import { useNavigate, useParams } from "react-router-dom";
+import {
+  deleteObject,
+  getDownloadURL,
+  ref,
+  uploadBytesResumable,
+} from "firebase/storage";
+import { addDoc, collection, doc, setDoc, Timestamp } from "firebase/firestore";
 import { db, storage } from "../../../firebase/config";
+import { useSelector } from "react-redux";
+import { selectProduct } from "../../../redux/slice/productSlice";
 import { Card, Loader } from "../../../components";
 import styles from "./addProducts.module.scss";
 import { toast } from "react-toastify";
@@ -24,13 +31,27 @@ const initialState = {
 };
 
 export const AddProduct = () => {
-  const [product, setProduct] = useState({ ...initialState });
+  const { id } = useParams();
+  const products = useSelector(selectProduct);
+  const editProduct = products.find(item => item.id === id);
+
+  const [product, setProduct] = useState(() => {
+    const newState = detectForm(id, { ...initialState }, editProduct);
+    return newState;
+  });
 
   const [isLoading, setIsLoading] = useState(false);
 
   const [uploadProgress, setUploadProgress] = useState(0);
 
   const navigate = useNavigate();
+
+  function detectForm(id, f1, f2) {
+    if (id === "ADD") {
+      return f1;
+    }
+    return f2;
+  }
 
   const handleInputChange = e => {
     const { name, value } = e.target;
@@ -62,20 +83,20 @@ export const AddProduct = () => {
     );
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
 
     setIsLoading(true);
 
     try {
-      const docRef = addDoc(collection(db, "products"), {
+      await addDoc(collection(db, "products"), {
         name: product.name,
         imageURL: product.imageURL,
         price: Number(product.price),
         category: product.category,
         brand: product.brand,
         desc: product.desc,
-        createdAt: Timestamp.now().toDate(),
+        createdAt: String(Timestamp.now().toDate()),
       });
       setIsLoading(false);
       setUploadProgress(0);
@@ -90,13 +111,43 @@ export const AddProduct = () => {
     }
   };
 
+  const editProductForm = async e => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    if (product.imageURL !== editProduct.imageURL) {
+      const storageRef = ref(storage, editProduct.imageURL);
+      await deleteObject(storageRef);
+    }
+
+    try {
+      await setDoc(doc(db, "products", id), {
+        name: product.name,
+        imageURL: product.imageURL,
+        price: Number(product.price),
+        category: product.category,
+        brand: product.brand,
+        desc: product.desc,
+        createdAt: product.createdAt,
+        editAt: String(Timestamp.now().toDate()),
+      });
+
+      setIsLoading(false);
+      toast.success("Товар изменен");
+      navigate("/admin/all-products");
+    } catch (error) {
+      setIsLoading(false);
+      toast.error(error.message);
+    }
+  };
+
   return (
     <>
       {isLoading && <Loader />}
       <div className={styles.product}>
-        <h1>Добавление товара</h1>
+        <h2>{detectForm(id, "Добавить товар", "Редактировать товар")}</h2>
         <Card cardClass={styles.card}>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={detectForm(id, handleSubmit, editProductForm)}>
             {/*NAME*/}
             <label>Наименование товара:</label>
             <input
@@ -198,7 +249,9 @@ export const AddProduct = () => {
               onChange={e => handleInputChange(e)}
             ></textarea>
 
-            <button className="--btn --btn-primary">Сохранить</button>
+            <button className="--btn --btn-primary">
+              {detectForm(id, "Сохранить", "Изменить")}
+            </button>
           </form>
         </Card>
       </div>

@@ -61,29 +61,29 @@ export const Login = () => {
 
         <Card>
           <div className={styles.form}>
-            <h2>Login</h2>
+            <h2>Войти</h2>
             <form onSubmit={loginUser}>
               <input
                 type="text"
-                placeholder="login"
+                placeholder="Логин"
                 required
                 value={email}
                 onChange={e => setEmail(e.target.value)}
               />
               <input
                 type="password"
-                placeholder="password"
+                placeholder="Пароль"
                 required
                 value={password}
                 onChange={e => setPassword(e.target.value)}
               />
               <button className="--btn --btn-primary --btn-block" type="submit">
-                login
+                Войти
               </button>
               <div className={styles.links}>
-                <Link to="/reset">Reset password</Link>
+                <Link to="/reset">Восстановить пароль</Link>
               </div>
-              <p>-- or --</p>
+              <p>-- или --</p>
             </form>
             <button
               className="--btn --btn-danger --btn-block"
@@ -93,8 +93,8 @@ export const Login = () => {
               login With Google
             </button>
             <span className={styles.register}>
-              <p>Don't have an account?</p>
-              <Link to="/register">Register</Link>
+              <p>У вас нет учетной записи? </p>
+              <Link to="/register">Регистрация</Link>
             </span>
           </div>
         </Card>

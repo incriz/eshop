@@ -20,12 +20,13 @@
 
     th {
       border: 1px solid #eee;
+
     }
 
     th,
     td {
       vertical-align: top;
-      text-align: left;
+      text-align: center;
       padding: 8px;
 
       &.icons {
@@ -35,6 +36,11 @@
         }
       }
     }
+
+    td:nth-of-type(3) {
+      text-align: left;
+    }
+
 
     tr {
       border-bottom: 1px solid #ccc;

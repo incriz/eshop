@@ -79,18 +79,18 @@ export const Navbar = ({ showMenu, hideMenu }) => {
         <li>
           <AdminOnlyLink>
             <Link to="/admin/home">
-              <button className="--btn --btn-primary">Admin</button>
+              <button className="--btn --btn-primary">Администрирование</button>
             </Link>
           </AdminOnlyLink>
         </li>
         <li>
           <NavLink to="/" className={activeLink}>
-            Home
+            Главна
           </NavLink>
         </li>
         <li>
           <NavLink className={activeLink} to="/contact">
-            Contact Us
+            О нас
           </NavLink>
         </li>
       </ul>
@@ -98,23 +98,23 @@ export const Navbar = ({ showMenu, hideMenu }) => {
         <span className={styles.links}>
           <ShowLogout>
             <NavLink to="/login" className={activeLink}>
-              Login
+              Войти
             </NavLink>
           </ShowLogout>
           <ShowOnLogin>
             <a href="#home">
               <FaUserCircle size={16} />
-              Hi, {displayName}
+              {displayName}
             </a>
           </ShowOnLogin>
           <ShowOnLogin>
             <NavLink to="/order-history" className={activeLink}>
-              My Orders
+              Заказы
             </NavLink>
           </ShowOnLogin>
           <ShowOnLogin>
             <NavLink to="/" onClick={logOutUser}>
-              Logout
+              Выйти
             </NavLink>
           </ShowOnLogin>
         </span>

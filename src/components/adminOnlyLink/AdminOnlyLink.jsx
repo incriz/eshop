@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
-import { selecetEmail } from "../../redux/slice/authSlice";
+import { selectEmail } from "../../redux/slice/authSlice";
 
 export const AdminOnlyLink = ({ children }) => {
-  const userEmail = useSelector(selecetEmail);
+  const userEmail = useSelector(selectEmail);
 
   if (userEmail === "test@gmail.com") {
     return children;
