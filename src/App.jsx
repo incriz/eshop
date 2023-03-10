@@ -3,6 +3,7 @@ import { Admin, Contact, Home, Login, Register, Reset } from "./pages";
 import { AdminOnlyRoute, Layout } from "./components";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import { ProductDetails } from "./components/products";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
               </AdminOnlyRoute>
             }
           />
+          <Route path="/product-details/:id" element={<ProductDetails />} />
         </Route>
       </Routes>
     </>

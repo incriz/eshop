@@ -4,7 +4,6 @@ import Logo from "../logo";
 import { AdminOnlyLink } from "../../../components";
 import { FaTimes, FaUserCircle } from "react-icons/fa";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import HeaderCart from "../header-cart";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../../../firebase/config";
 import { useDispatch } from "react-redux";
@@ -15,6 +14,7 @@ import {
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ShowLogout, ShowOnLogin } from "../../hiddenLink/HiddenLink";
+import HeaderCart from "../header-cart";
 
 export const Navbar = ({ showMenu, hideMenu }) => {
   const [displayName, setDisplayName] = useState("");
@@ -103,7 +103,7 @@ export const Navbar = ({ showMenu, hideMenu }) => {
           </ShowLogout>
           <ShowOnLogin>
             <a href="#home">
-              <FaUserCircle size={16} />
+              <FaUserCircle size={16} className={styles.icon} />
               {displayName}
             </a>
           </ShowOnLogin>

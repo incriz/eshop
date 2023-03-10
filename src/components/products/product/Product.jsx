@@ -8,6 +8,7 @@ import {
   selectProduct,
   STORE_PRODUCTS,
 } from "../../../redux/slice/productSlice";
+import { Loader } from "../../../components";
 
 export const Product = () => {
   const { data, isLoading } = UseFetchCollection("products");
@@ -28,10 +29,10 @@ export const Product = () => {
     <section>
       <div className={`container ${styles.product}`}>
         <aside className={styles.filter}>
-          <ProductFilter />
+          {isLoading ? null : <ProductFilter />}
         </aside>
         <div className={styles.content}>
-          <ProductList products={products} />
+          {isLoading ? <Loader /> : <ProductList products={products} />}
         </div>
       </div>
     </section>
