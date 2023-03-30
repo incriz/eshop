@@ -8,6 +8,7 @@ import AdminOnlyRoute from "./adminOnlyRoute";
 import AdminOnlyLink from "./adminOnlyLink";
 import { Product } from "./products";
 import Search from "./search";
+import Pagination from "./pagination";
 
 export {
   Header,
@@ -20,4 +21,5 @@ export {
   AdminOnlyLink,
   Product,
   Search,
+  Pagination,
 };

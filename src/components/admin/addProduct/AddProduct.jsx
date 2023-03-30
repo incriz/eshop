@@ -9,7 +9,7 @@ import {
 import { addDoc, collection, doc, setDoc, Timestamp } from "firebase/firestore";
 import { db, storage } from "../../../firebase/config";
 import { useSelector } from "react-redux";
-import { selectProduct } from "../../../redux/slice/productSlice";
+import { selectProducts } from "../../../redux/slice/productSlice";
 import { Card, Loader } from "../../../components";
 import styles from "./addProducts.module.scss";
 import { toast } from "react-toastify";
@@ -32,7 +32,7 @@ const initialState = {
 
 export const AddProduct = () => {
   const { id } = useParams();
-  const products = useSelector(selectProduct);
+  const products = useSelector(selectProducts);
   const editProduct = products.find(item => item.id === id);
 
   const [product, setProduct] = useState(() => {

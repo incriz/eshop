@@ -29,10 +29,10 @@ export const ProductItem = ({
       </Link>
       <div className={styles.content}>
         <div className={styles.details}>
-          <p>{`${price}`}</p>
+          <p>{`${price}₽`}</p>
           <h4>{!grid ? name : shortenText(name, 18)}</h4>
         </div>
-        {!grid && <p>{shortenText(desc, 200)}</p>}
+        {!grid && <p>{shortenText(desc, 100)}</p>}
         <button className="--btn --btn-danger">Добавить товар</button>
       </div>
     </Card>

@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { UseFetchCollection } from "../../../customHooks/UseFetchCollection";
 import {
-  selectProduct,
+  selectProducts,
   STORE_PRODUCTS,
 } from "../../../redux/slice/productSlice";
 import Notiflix from "notiflix";
@@ -18,7 +18,7 @@ import styles from "./viewProducts.module.scss";
 export const ViewProducts = () => {
   const { data, isLoading } = UseFetchCollection("products");
 
-  const products = useSelector(selectProduct);
+  const products = useSelector(selectProducts);
 
   const dispatch = useDispatch();
 

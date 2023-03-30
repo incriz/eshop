@@ -35,7 +35,7 @@ export const ProductDetails = () => {
       <div className={`container ${styles.product}`}>
         <h2>Информация о товаре</h2>
         <div>
-          <Link to="#/products">
+          <Link to="/#products">
             <button className="--btn --btn-primary">&larr; Назад</button>
           </Link>
         </div>

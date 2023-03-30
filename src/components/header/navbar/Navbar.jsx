@@ -85,7 +85,7 @@ export const Navbar = ({ showMenu, hideMenu }) => {
         </li>
         <li>
           <NavLink to="/" className={activeLink}>
-            Главна
+            Главная
           </NavLink>
         </li>
         <li>
@@ -112,13 +112,15 @@ export const Navbar = ({ showMenu, hideMenu }) => {
               Заказы
             </NavLink>
           </ShowOnLogin>
+        </span>
+        <HeaderCart />
+        <span className={styles.links}>
           <ShowOnLogin>
             <NavLink to="/" onClick={logOutUser}>
               Выйти
             </NavLink>
           </ShowOnLogin>
         </span>
-        <HeaderCart />
       </div>
     </nav>
   );
