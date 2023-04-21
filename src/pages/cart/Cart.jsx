@@ -1,9 +1,123 @@
 import React from "react";
+import styles from "./Cart.module.scss";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  ADD_TO_CART,
+  selectCartItems,
+  selectCartTotalAmount,
+  selectCartTotalQuantity,
+} from "../../redux/slice/cartSlice";
+import { Link } from "react-router-dom";
+import { FaTrashAlt } from "react-icons/fa";
+import { BiMinus, BiPlus } from "react-icons/bi";
+import { Card } from "../../components";
 
 export const Cart = () => {
- 
-  return (
-   <div></div>
-  );
-}
+  const cartItems = useSelector(selectCartItems);
+  const cartTotalAmount = useSelector(selectCartTotalAmount);
+  const cartTotalQuantity = useSelector(selectCartTotalQuantity);
 
+  console.log(cartItems);
+
+  const dispatch = useDispatch();
+
+  const increaseCart = cart => {
+    dispatch(ADD_TO_CART(cart));
+  };
+  const decreaseCart = cart => {};
+
+  return (
+    <section>
+      <div className={`container ${styles.table}`}>
+        <h2>Корзина товаров</h2>
+        {cartItems.length === 0 ? (
+          <>
+            <p>Вы ничего не добавили!</p>
+            <br />
+            <div>
+              <Link to="/#products">&larr; Список товаров</Link>
+            </div>
+          </>
+        ) : (
+          <>
+            <table>
+              <thead>
+                <tr>
+                  <th>№</th>
+                  <th>Товар</th>
+                  <th>Цена</th>
+                  <th>Кол-во</th>
+                  <th>Сумма</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {cartItems.map((cart, index) => {
+                  const { id, name, price, imageURL, cartQuantity } = cart;
+                  return (
+                    <tr key={id}>
+                      <td>{index + 1}</td>
+                      <td>
+                        <p>
+                          <b>{name}</b>
+                        </p>
+                        <img
+                          src={imageURL}
+                          alt={name}
+                          style={{ width: "100px" }}
+                        />
+                      </td>
+                      <td>{price + "₽"}</td>
+                      <td>
+                        <div className={styles.count}>
+                          <button
+                            className="--btn --btn-primary"
+                            onClick={() => decreaseCart(cart)}
+                          >
+                            <BiMinus size={10} />
+                          </button>
+                          <p>
+                            <b>{`${cartQuantity}`}</b>
+                          </p>
+                          <button
+                            className="--btn --btn-primary"
+                            onClick={() => increaseCart(cart)}
+                          >
+                            <BiPlus size={10} />
+                          </button>
+                        </div>
+                      </td>
+                      <td>{(price * cartQuantity).toFixed(2) + "₽"}</td>
+                      <td className={styles.icons}>
+                        <FaTrashAlt size={19} color="red" />
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+            <div className={styles.summary}>
+              <div>
+                <Link to="/#products">
+                  <button className="--btn --btn-primary">&larr; Назад</button>
+                </Link>
+                <button className="--btn --btn-danger">Очисть корзину</button>
+              </div>
+              <div>
+                <Card cardClass={styles.card}>
+                  <div className={styles.text}>
+                    <h4>Общая стоимость: </h4>
+                    <h3>{`${cartTotalAmount.toFixed(2)}₽`}</h3>
+                  </div>
+                  <button className="--btn --btn-primary --btn-block">
+                    Оформить
+                  </button>
+                </Card>
+              </div>
+            </div>
+          </>
+        )}
+      </div>
+    </section>
+  );
+};
