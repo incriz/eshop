@@ -11,13 +11,23 @@ import loginImg from "../../../assets/login.png";
 import { FaGoogle } from "react-icons/fa";
 import { Card, Loader } from "../../../components";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
+import { selectPriviousURL } from "../../../redux/slice/cartSlice";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
+  const previousURL = useSelector(selectPriviousURL);
   const navigate = useNavigate();
+
+  const redirectUser = () => {
+    if (previousURL.includes("cart")) {
+      return navigate("/cart");
+    }
+    navigate("/");
+  };
 
   const loginUser = e => {
     e.preventDefault();
@@ -29,8 +39,8 @@ export const Login = () => {
         // const user = userCredential.user;
 
         setIsLoading(false);
-        navigate("/");
         toast.success("Добро пожаловать!");
+        redirectUser();
       })
       .catch(error => {
         toast.error(error.message);
@@ -42,9 +52,7 @@ export const Login = () => {
   const loginWithGoogle = () => {
     signInWithPopup(auth, provider)
       .then(result => {
-        // const user = result.user;
-        toast.success("login successfully!");
-        navigate("/");
+        redirectUser();
       })
       .catch(error => {
         toast.error(error.message);

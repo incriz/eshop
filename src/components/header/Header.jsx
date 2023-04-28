@@ -7,6 +7,7 @@ import Navbar from "./navbar";
 
 export const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
+  const [scrollPage, setScrollPage] = useState(false);
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
@@ -16,8 +17,18 @@ export const Header = () => {
     setShowMenu(false);
   };
 
+  const fixNavbar = () => {
+    if (window.scrollY > 5) {
+      setScrollPage(true);
+    } else {
+      setScrollPage(false);
+    }
+  };
+
+  window.addEventListener("scroll", fixNavbar);
+
   return (
-    <header>
+    <header className={scrollPage ? `${styles.fixed}` : null}>
       <div className={styles.header}>
         <Logo />
         <Navbar showMenu={showMenu} hideMenu={hideMenu} />

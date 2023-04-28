@@ -1,5 +1,15 @@
 import { Route, Routes } from "react-router-dom";
-import { Admin, Cart, Contact, Home, Login, Register, Reset } from "./pages";
+import {
+  Admin,
+  Cart,
+  Checkout,
+  CheckoutDetails,
+  Contact,
+  Home,
+  Login,
+  Register,
+  Reset,
+} from "./pages";
 import { AdminOnlyRoute, Layout } from "./components";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
@@ -27,6 +37,8 @@ function App() {
           />
           <Route path="/product-details/:id" element={<ProductDetails />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout-details" element={<CheckoutDetails />} />
+          <Route path="/checkout" element={<Checkout />} />
         </Route>
       </Routes>
     </>

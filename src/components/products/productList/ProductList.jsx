@@ -16,7 +16,7 @@ export const ProductList = ({ products }) => {
   const [sort, setSort] = useState("all-products");
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage, setProductsPerPage] = useState(2);
+  const [productsPerPage, setProductsPerPage] = useState(12);
 
   const filteredProducts = useSelector(selectFilteredProducts);
   const dispatch = useDispatch();

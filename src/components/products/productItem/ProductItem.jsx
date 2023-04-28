@@ -5,8 +5,8 @@ import Card from "../../card";
 import { useDispatch, useSelector } from "react-redux";
 import {
   ADD_TO_CART,
+  CALCULATE_TOTAL_QUANTITY,
   selectCartItems,
-  selectCartTotalQuantity,
 } from "../../../redux/slice/cartSlice";
 import { selectProducts } from "../../../redux/slice/productSlice";
 
@@ -29,26 +29,16 @@ export const ProductItem = ({
     return text;
   };
 
-  const cartTotalQuantity = useSelector(selectCartTotalQuantity);
   const cartItems = useSelector(selectCartItems);
   const products = useSelector(selectProducts);
 
   const productsID = products.map(item => item.id);
 
-  const values = Object.values(cartItems);
-
-  const currentID = values.map(item => productsID.includes(item.id));
-
-  const filtered = values.filter(item => item.cartQuantity > 0);
-  // //
-  // // console.log(filtered);
-
-  // const filtered = values.filter(
-  //   item => item.cartQuantity > 0 && productsID.includes(item.id)
-  // );
+  console.log(products);
 
   const addToCart = product => {
     dispatch(ADD_TO_CART(product));
+    dispatch(CALCULATE_TOTAL_QUANTITY());
   };
 
   return (

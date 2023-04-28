@@ -51,7 +51,6 @@ export const Navbar = ({ showMenu, hideMenu }) => {
   const logOutUser = () => {
     signOut(auth)
       .then(() => {
-        toast.success("Logout successfully.");
         navigate("/");
       })
       .catch(error => {

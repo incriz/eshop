@@ -9,6 +9,8 @@ import AdminOnlyLink from "./adminOnlyLink";
 import { Product } from "./products";
 import Search from "./search";
 import Pagination from "./pagination";
+import CheckoutSummary from "./checkoutSummary";
+import CheckoutForm from "./checkoutForm";
 
 export {
   Header,
@@ -22,4 +24,6 @@ export {
   Product,
   Search,
   Pagination,
+  CheckoutSummary,
+  CheckoutForm,
 };
