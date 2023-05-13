@@ -12,14 +12,14 @@ import { FaGoogle } from "react-icons/fa";
 import { Card, Loader } from "../../../components";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
-import { selectPriviousURL } from "../../../redux/slice/cartSlice";
+import { selectPreviousURL } from "../../../redux/slice/cartSlice";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const previousURL = useSelector(selectPriviousURL);
+  const previousURL = useSelector(selectPreviousURL);
   const navigate = useNavigate();
 
   const redirectUser = () => {
@@ -36,8 +36,6 @@ export const Login = () => {
 
     signInWithEmailAndPassword(auth, email, password)
       .then(userCredential => {
-        // const user = userCredential.user;
-
         setIsLoading(false);
         toast.success("Добро пожаловать!");
         redirectUser();
@@ -102,7 +100,9 @@ export const Login = () => {
             </button>
             <span className={styles.register}>
               <p>У вас нет учетной записи? </p>
-              <Link to="/register">Регистрация</Link>
+              <Link to="/register" style={{ color: "red" }}>
+                Регистрация
+              </Link>
             </span>
           </div>
         </Card>

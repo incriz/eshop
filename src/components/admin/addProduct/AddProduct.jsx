@@ -19,6 +19,8 @@ const categories = [
   { id: 2, name: "Телефон" },
   { id: 3, name: "Системный блок" },
   { id: 4, name: "Аксессуары" },
+  { id: 5, name: "Комплектующие" },
+  { id: 6, name: "Переферия" },
 ];
 
 const initialState = {

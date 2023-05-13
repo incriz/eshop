@@ -77,7 +77,9 @@ export const Register = () => {
             </form>
             <span className={styles.register}>
               <p>У вас есть аккаунт?</p>
-              <Link to="/login">Войти</Link>
+              <Link to="/login" style={{ color: "red" }}>
+                Войти
+              </Link>
             </span>
           </div>
         </Card>

@@ -4,6 +4,7 @@ import {
   Cart,
   Checkout,
   CheckoutDetails,
+  CheckoutSuccess,
   Contact,
   Home,
   Login,
@@ -39,6 +40,7 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout-details" element={<CheckoutDetails />} />
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/checkout-success" element={<CheckoutSuccess />} />
         </Route>
       </Routes>
     </>

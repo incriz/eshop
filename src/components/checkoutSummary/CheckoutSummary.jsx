@@ -16,7 +16,6 @@ export const CheckoutSummary = () => {
 
   return (
     <div className={styles}>
-      <h3>Summary</h3>
       <div>
         {cartItems.length === 0 ? (
           <>

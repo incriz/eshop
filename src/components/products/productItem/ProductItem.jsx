@@ -6,9 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   ADD_TO_CART,
   CALCULATE_TOTAL_QUANTITY,
+  DECREASE_TO_CART,
   selectCartItems,
 } from "../../../redux/slice/cartSlice";
-import { selectProducts } from "../../../redux/slice/productSlice";
 
 export const ProductItem = ({
   product,
@@ -28,13 +28,23 @@ export const ProductItem = ({
     }
     return text;
   };
-
   const cartItems = useSelector(selectCartItems);
-  const products = useSelector(selectProducts);
 
-  const productsID = products.map(item => item.id);
+  const cart = cartItems.find(cart => cart.id === id);
 
-  console.log(products);
+  const isCartAdded = cartItems.findIndex(cart => {
+    return cart.id === id;
+  });
+
+  const addCart = product => {
+    dispatch(ADD_TO_CART(product));
+    dispatch(CALCULATE_TOTAL_QUANTITY());
+  };
+
+  const decreaseCart = product => {
+    dispatch(DECREASE_TO_CART(product));
+    dispatch(CALCULATE_TOTAL_QUANTITY());
+  };
 
   const addToCart = product => {
     dispatch(ADD_TO_CART(product));
@@ -54,12 +64,36 @@ export const ProductItem = ({
           <h4>{!grid ? name : shortenText(name, 18)}</h4>
         </div>
         {!grid && <p>{shortenText(desc, 100)}</p>}
-        <button
-          className="--btn --btn-danger"
-          onClick={() => addToCart(product)}
-        >
-          Добавить товар
-        </button>
+        {isCartAdded < 0 ? (
+          <button
+            className="--btn --btn-danger"
+            onClick={() => addToCart(product)}
+          >
+            Добавить товар
+          </button>
+        ) : (
+          <>
+            <div className={styles.count}>
+              <button
+                style={{ width: "40px" }}
+                className="--btn --btn-danger"
+                onClick={() => decreaseCart(product)}
+              >
+                -
+              </button>
+              <p>
+                <b>{cart.cartQuantity}</b>
+              </p>
+              <button
+                style={{ width: "40px" }}
+                className="--btn --btn-danger"
+                onClick={() => addCart(product)}
+              >
+                +
+              </button>
+            </div>
+          </>
+        )}
       </div>
     </Card>
   );

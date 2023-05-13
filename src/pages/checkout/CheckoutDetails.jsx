@@ -40,12 +40,11 @@ export const CheckoutDetails = () => {
   return (
     <section>
       <div className={`container ${styles.checkout}`}>
-        <h2>Checkout Details</h2>
+        <h2>Оформление заказа</h2>
 
         <form onSubmit={handleSubmit}>
           <div>
             <Card cardClass={styles.card}>
-              <h3>Shipping Address</h3>
               {/*Имя*/}
               <label>Имя получателя</label>
               <input

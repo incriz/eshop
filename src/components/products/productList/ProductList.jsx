@@ -68,25 +68,32 @@ export const ProductList = ({ products }) => {
       </div>
       <div className={grid ? `${styles.grid}` : `${styles.list}`}>
         {filteredProducts.length === 0 ? (
-          <p>Товары не найдены</p>
+          <p>Товар не найден</p>
         ) : (
           <>
             {currentProducts.map(product => {
               return (
                 <div key={product.id}>
-                  <ProductItem {...product} grid={grid} product={product} />
+                  <ProductItem
+                    {...product}
+                    id={product.id}
+                    grid={grid}
+                    product={product}
+                  />
                 </div>
               );
             })}
           </>
         )}
       </div>
-      <Pagination
-        productsPerPage={productsPerPage}
-        setCurrentPage={setCurrentPage}
-        currentPage={currentPage}
-        totalProducts={filteredProducts.length}
-      />
+      {filteredProducts.length === 0 ? null : (
+        <Pagination
+          productsPerPage={productsPerPage}
+          setCurrentPage={setCurrentPage}
+          currentPage={currentPage}
+          totalProducts={filteredProducts.length}
+        />
+      )}
     </div>
   );
 };

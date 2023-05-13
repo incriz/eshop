@@ -7,7 +7,7 @@ export const Logo = () => {
     <div className={styles.logo}>
       <Link to="./">
         <h2>
-          e<span>Shop</span>.
+          <span>D</span>евайс
         </h2>
       </Link>
     </div>
