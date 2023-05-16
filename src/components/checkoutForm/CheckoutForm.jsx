@@ -10,16 +10,34 @@ import Loader from "../loader";
 import { toast } from "react-toastify";
 import CheckoutSummary from "../checkoutSummary";
 import { useNavigate } from "react-router-dom";
+import { addDoc, collection, Timestamp } from "firebase/firestore";
+import { db } from "../../firebase/config";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  CLEAR_CART,
+  selectCartItems,
+  selectCartTotalAmount,
+} from "../../redux/slice/cartSlice";
+import { selectEmail, selectUserID } from "../../redux/slice/authSlice";
+import { selectShippingAddress } from "../../redux/slice/checkoutSlice";
+import { STORE_ORDERS } from "../../redux/slice/orderSlice";
 
 export const CheckoutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
 
-  const navigate = useNavigate();
-
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const cartItems = useSelector(selectCartItems);
+  const userID = useSelector(selectUserID);
+  const userEmail = useSelector(selectEmail);
+  const shippingAddress = useSelector(selectShippingAddress);
+  const cartTotalAmount = useSelector(selectCartTotalAmount);
 
   useEffect(() => {
     if (!stripe) {
@@ -35,8 +53,30 @@ export const CheckoutForm = () => {
     }
   }, [stripe]);
 
-  const saveOrder = () => {
-    console.log("save order");
+  const saveOrder = async () => {
+    const today = new Date();
+    const date = today.toDateString();
+    const time = today.toLocaleTimeString();
+    const orderConfig = {
+      userID,
+      userEmail,
+      orderDate: String(date),
+      orderTime: String(time),
+      orderAmount: Number(cartTotalAmount),
+      orderStatus: "Оплачен",
+      cartItems,
+      shippingAddress,
+      createdAT: String(Timestamp.now().toDate()),
+    };
+
+    try {
+      await addDoc(collection(db, "orders"), orderConfig);
+      toast.success("Заказ сохранен");
+      dispatch(CLEAR_CART());
+      dispatch(STORE_ORDERS(orderConfig));
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   const handleSubmit = async e => {

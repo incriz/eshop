@@ -11,6 +11,7 @@ import Search from "./search";
 import Pagination from "./pagination";
 import CheckoutSummary from "./checkoutSummary";
 import CheckoutForm from "./checkoutForm";
+import ReviewProducts from "./reviewProducts";
 
 export {
   Header,
@@ -26,4 +27,5 @@ export {
   Pagination,
   CheckoutSummary,
   CheckoutForm,
+  ReviewProducts,
 };

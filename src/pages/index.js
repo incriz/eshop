@@ -9,6 +9,7 @@ import Reset from "./auth/reset";
 import { Checkout } from "./checkout/Checkout";
 import { CheckoutDetails } from "./checkout/CheckoutDetails";
 import { CheckoutSuccess } from "./checkout/CheckoutSuccess";
+import OrderDetails from "./orderDetails";
 
 export {
   Admin,
@@ -22,4 +23,5 @@ export {
   Checkout,
   CheckoutDetails,
   CheckoutSuccess,
+  OrderDetails,
 };

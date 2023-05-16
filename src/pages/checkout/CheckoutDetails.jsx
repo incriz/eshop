@@ -8,8 +8,8 @@ import { useNavigate } from "react-router-dom";
 const initialAddressState = {
   name: "",
   number: "",
-  city: "",
   region: "",
+  city: "",
   street: "",
   apartment: "",
   postal_code: "",
@@ -75,7 +75,6 @@ export const CheckoutDetails = () => {
                 value={shippingAddress.region}
                 onChange={e => handleShipping(e)}
               />
-              {/*Улица*/}
               <label>Улица</label>
               <input
                 type="text"
@@ -115,7 +114,6 @@ export const CheckoutDetails = () => {
                 value={shippingAddress.number}
                 onChange={e => handleShipping(e)}
               />
-
               <button type="submit" className="--btn --btn-primary">
                 Подтвердить заказ
               </button>

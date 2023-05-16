@@ -15,12 +15,11 @@ import styles from "./addProducts.module.scss";
 import { toast } from "react-toastify";
 
 const categories = [
-  { id: 1, name: "Ноутбук" },
-  { id: 2, name: "Телефон" },
-  { id: 3, name: "Системный блок" },
-  { id: 4, name: "Аксессуары" },
-  { id: 5, name: "Комплектующие" },
-  { id: 6, name: "Переферия" },
+  { id: 1, name: "Компьютеры" },
+  { id: 2, name: "Телефоны" },
+  { id: 3, name: "Зарядные устройства" },
+  { id: 4, name: "Комплектующие" },
+  { id: 5, name: "Периферийные устройства" },
 ];
 
 const initialState = {

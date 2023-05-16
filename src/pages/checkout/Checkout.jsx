@@ -31,7 +31,7 @@ export const Checkout = () => {
     dispatch(CALCULATE_TOTAL_QUANTITY);
   }, [dispatch, cartItems]);
 
-  const description = `Оплата: email: ${customerEmail}, Кол-во: ${totalAmount} `;
+  const description = `Оплата: email: ${customerEmail}`;
 
   useEffect(() => {
     fetch("http://localhost:4242/create-payment-intent", {

@@ -11,41 +11,35 @@ app.get("/", (req, res) => {
   res.send("Добро пожаловать в Eshop");
 });
 
-const array = [];
+let array = [];
 const calculateOrderAmount = items => {
+  console.log(items);
   items.map(item => {
     const { price, cartQuantity } = item;
+
     const cartItemAmount = price * cartQuantity;
     return array.push(cartItemAmount);
   });
   const totalAmount = array.reduce((a, b) => {
     return a + b;
   }, 0);
-  console.log(totalAmount);
-  return totalAmount;
+
+  array.splice(0, array.length);
+  return totalAmount * 100;
 };
+console.log(array);
 
 app.post("/create-payment-intent", async (req, res) => {
-  const { items, shipping, description } = req.body;
+  const { items, description } = req.body;
 
   const paymentIntent = await stripe.paymentIntents.create({
     amount: calculateOrderAmount(items),
-    currency: "usd",
+    currency: "rub",
     automatic_payment_methods: {
       enabled: true,
     },
     description,
-    shipping: {
-      address: {
-        city: shipping.city,
-        region: shipping.region,
-        street: shipping.street,
-        apartment: shipping.apartment,
-        postal_code: shipping.postal_code,
-      },
-      name: shipping.name,
-      phone: shipping.phone,
-    },
+
     //receipt_email: userEmail
   });
 

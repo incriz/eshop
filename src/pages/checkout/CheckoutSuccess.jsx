@@ -8,11 +8,10 @@ export const CheckoutSuccess = () => {
         <h2>Платеж прошел!</h2>
         <p>Спасибо за покупку!</p>
         <br />
-        <Link to="/order-history">
-          <button className="--btn --btn-primary">
-            Посмотреть статус заказа
-          </button>
-        </Link>
+
+        <button className="--btn --btn-primary">
+          <Link to="/order-history">Посмотреть статус заказа</Link>
+        </button>
       </div>
     </section>
   );
