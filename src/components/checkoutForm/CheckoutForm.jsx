@@ -54,13 +54,18 @@ export const CheckoutForm = () => {
   }, [stripe]);
 
   const saveOrder = async () => {
-    const today = new Date();
-    const date = today.toDateString();
-    const time = today.toLocaleTimeString();
+    let date = new Date();
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+    day = String(day).padStart(2, "0");
+    month = String(month).padStart(2, "0");
+    let formattedDate = day + "-" + month + "-" + year;
+    const time = date.toLocaleTimeString();
     const orderConfig = {
       userID,
       userEmail,
-      orderDate: String(date),
+      orderDate: String(formattedDate),
       orderTime: String(time),
       orderAmount: Number(cartTotalAmount),
       orderStatus: "Оплачен",
@@ -71,9 +76,9 @@ export const CheckoutForm = () => {
 
     try {
       await addDoc(collection(db, "orders"), orderConfig);
-      toast.success("Заказ сохранен");
       dispatch(CLEAR_CART());
       dispatch(STORE_ORDERS(orderConfig));
+      navigate("/cart");
     } catch (error) {
       toast.error(error.message);
     }
@@ -109,7 +114,8 @@ export const CheckoutForm = () => {
             setIsLoading(false);
             toast.success("Платеж прошел!");
             saveOrder();
-            navigate("/checkout-success");
+            dispatch(CLEAR_CART());
+            navigate("/order-history");
           }
         }
       });
@@ -124,7 +130,6 @@ export const CheckoutForm = () => {
   return (
     <section>
       <div className={`container ${styles.checkout}`}>
-        <h2>Checkout</h2>
         <form onSubmit={handleSubmit}>
           <div>
             <Card cardClass={styles.card}>
@@ -146,7 +151,6 @@ export const CheckoutForm = () => {
                   {isLoading ? <Loader /> : "Pay now"}
                 </span>
               </button>
-              {/* Show any error or success messages */}
               {message && <div id={styles["payment-message"]}>{message}</div>}
             </Card>
           </div>

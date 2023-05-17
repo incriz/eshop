@@ -87,11 +87,6 @@ export const Navbar = ({ showMenu, hideMenu }) => {
             Главная
           </NavLink>
         </li>
-        <li>
-          <NavLink className={activeLink} to="/contact">
-            О нас
-          </NavLink>
-        </li>
       </ul>
       <div className={styles["header-right"]} onClick={hideMenu}>
         <span className={styles.links}>

@@ -16,6 +16,7 @@
     border-bottom: 1px solid #777;
   }
 
+
   .category button:nth-of-type(6) {
     padding-bottom: 38px;
   }
@@ -29,6 +30,7 @@
       width: 100%;
     }
 
+
   }
 }
 
@@ -36,12 +38,12 @@
   color: orangered;
 }
 
-//.active::before {
-//  content: "";
-//  position: absolute;
-//  left: 0;
-//  bottom: 0;
-//  width: 2px;
-//  height: 100%;
-//  background-color: var(--color-danger);
-//}
+@media screen and (max-width: 985px) {
+  .category button:nth-of-type(5) {
+    padding-bottom: 38px;
+  }
+}
+
+.active {
+  color: orangered;
+}

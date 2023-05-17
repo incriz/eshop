@@ -55,16 +55,7 @@ export const CheckoutDetails = () => {
                 value={shippingAddress.name}
                 onChange={e => handleShipping(e)}
               />
-              {/*Город*/}
-              <label>Город</label>
-              <input
-                type="text"
-                placeholder="Введите город"
-                name="city"
-                required
-                value={shippingAddress.city}
-                onChange={e => handleShipping(e)}
-              />
+
               {/*Область*/}
               <label>Область</label>
               <input
@@ -75,6 +66,17 @@ export const CheckoutDetails = () => {
                 value={shippingAddress.region}
                 onChange={e => handleShipping(e)}
               />
+              {/*Город*/}
+              <label>Город</label>
+              <input
+                type="text"
+                placeholder="Введите город"
+                name="city"
+                required
+                value={shippingAddress.city}
+                onChange={e => handleShipping(e)}
+              />
+
               <label>Улица</label>
               <input
                 type="text"

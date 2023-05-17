@@ -11,10 +11,9 @@ const orderSlice = createSlice({
   initialState,
   reducers: {
     STORE_ORDERS(state, action) {
-      console.log(action.payload);
-      state.orderHistory = action.payload;
+      const tempOrder = { ...action.payload };
+      state.orderHistory.push(tempOrder);
       localStorage.setItem("orderHistory", JSON.stringify(state.orderHistory));
-      localStorage.clear();
     },
   },
 });
