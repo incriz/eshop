@@ -18,11 +18,6 @@ export const Navbar = () => {
       <nav>
         <ul>
           <li>
-            <NavLink to="/admin/home" className={activeLink}>
-              Главная
-            </NavLink>
-          </li>
-          <li>
             <NavLink to="/admin/all-products" className={activeLink}>
               Все товары
             </NavLink>

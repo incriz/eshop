@@ -109,7 +109,7 @@ export const CheckoutDetails = () => {
               {/*Номер телефона*/}
               <label>Номер телефона</label>
               <input
-                type="text"
+                type="number"
                 placeholder="Введите номер"
                 name="number"
                 required

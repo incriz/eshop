@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  shippingAddress: {},
+  shippingAddress: [],
 };
 
 const checkoutSlice = createSlice({
@@ -9,7 +9,8 @@ const checkoutSlice = createSlice({
   initialState,
   reducers: {
     SAVE_SHIPPING_ADDRESS(state, action) {
-      state.shippingAddress = action.payload;
+      const tempShipping = { ...action.payload };
+      state.shippingAddress.push(tempShipping);
     },
   },
 });

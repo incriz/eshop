@@ -57,22 +57,22 @@ export const ProductFilter = ({ toggleFilter }) => {
           );
         })}
       </div>
-      <div>
-        <h4>Цена</h4>
-        <p>{`${price}₽`}</p>
-        <div className={styles.price}>
-          <input
-            type="range"
-            value={price}
-            min={minPrice}
-            max={maxPrice}
-            onChange={e => setPrice(e.target.value)}
-          />
-        </div>
-        <button className="--btn --btn-danger" onClick={clearFilters}>
-          Очистить
-        </button>
-      </div>
+      {/*<div>*/}
+      {/*  <h4>Цена</h4>*/}
+      {/*  <p>{`${price}₽`}</p>*/}
+      {/*  <div className={styles.price}>*/}
+      {/*    <input*/}
+      {/*      type="range"*/}
+      {/*      value={price}*/}
+      {/*      min={minPrice}*/}
+      {/*      max={maxPrice}*/}
+      {/*      onChange={e => setPrice(e.target.value)}*/}
+      {/*    />*/}
+      {/*  </div>*/}
+      {/*  <button className="--btn --btn-danger" onClick={clearFilters}>*/}
+      {/*    Очистить*/}
+      {/*  </button>*/}
+      {/*</div>*/}
     </div>
   );
 };

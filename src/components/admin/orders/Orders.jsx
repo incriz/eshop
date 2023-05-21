@@ -1,13 +1,10 @@
 import React from "react";
-import "./orders.module.scss";
-import styles from "../../../pages/orderHistory/OrderHistory.module.scss";
+import styles from "./orders.module.scss";
 import { useSelector } from "react-redux";
 import { selectOrderHistory } from "../../../redux/slice/orderSlice";
-import { selectUserID } from "../../../redux/slice/authSlice";
 
 export const Orders = () => {
   const orders = useSelector(selectOrderHistory);
-  const userID = useSelector(selectUserID);
 
   return (
     <section>
@@ -23,8 +20,7 @@ export const Orders = () => {
                   <tr>
                     <th>№</th>
                     <th>Дата</th>
-                    <th>Пользователь</th>
-                    <th>Почта</th>
+                    <th>Данные</th>
                     <th>Наименование</th>
                     <th>Сумма</th>
                     <th>Статус</th>
@@ -44,16 +40,41 @@ export const Orders = () => {
                       userEmail,
                     } = order;
                     return (
-                      <tr key={id}>
+                      <tr key={index}>
                         <td>{index + 1}</td>
                         <td>
                           {orderDate} в {orderTime}
                         </td>
-                        <td>{userID}</td>
-                        <td>{userEmail}</td>
+                        {/*<td>{userID}</td>*/}
                         <td>
-                          {cartItems.map(item => {
-                            return <p>{item.name}</p>;
+                          {shippingAddress.map((item, i) => {
+                            return (
+                              <div key={i}>
+                                <p>
+                                  <b>Имя:</b> {``} {item.name}
+                                </p>
+                                <p>
+                                  <b>Телефон:</b> {``}
+                                  {item.number}
+                                </p>
+                                <p>
+                                  <b>Aдрес:</b> {``}
+                                  {item.region}, {``}
+                                  г. {``} {item.city}, {``}
+                                  ул.{``} {item.street}, {``}
+                                  кв.{``} {item.apartment}
+                                </p>
+                                <p>
+                                  <b>Почтовый индекс:</b> {``}
+                                  {item.postal_code}
+                                </p>
+                              </div>
+                            );
+                          })}
+                        </td>
+                        <td>
+                          {cartItems.map((item, i) => {
+                            return <p key={i}>{item.name}</p>;
                           })}
                         </td>
                         <td>{`${orderAmount}₽`}</td>

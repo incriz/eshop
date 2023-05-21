@@ -4,7 +4,6 @@ import {
   Cart,
   Checkout,
   CheckoutDetails,
-  CheckoutSuccess,
   Home,
   Login,
   OrderHistory,
@@ -39,7 +38,6 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout-details" element={<CheckoutDetails />} />
           <Route path="/checkout" element={<Checkout />} />
-          <Route path="/checkout-success" element={<CheckoutSuccess />} />
           <Route path="/order-history" element={<OrderHistory />} />
         </Route>
       </Routes>

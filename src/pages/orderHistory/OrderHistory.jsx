@@ -39,7 +39,7 @@ export const OrderHistory = () => {
                       cartItems,
                     } = order;
                     return (
-                      <tr key={id}>
+                      <tr key={index}>
                         <td>{index + 1}</td>
                         <td>
                           {orderDate} в {orderTime}
