@@ -19,7 +19,6 @@ export const CheckoutDetails = () => {
   const [shippingAddress, setShippingAddress] = useState({
     ...initialAddressState,
   });
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

@@ -91,14 +91,11 @@ export const CheckoutForm = () => {
     if (!stripe || !elements) {
       return;
     }
-
     setIsLoading(true);
-
     const confirmPayment = await stripe
       .confirmPayment({
         elements,
         confirmParams: {
-          // Make sure to change this to your payment completion page
           return_url: "http://localhost:3000/checkout-success",
         },
         redirect: "if_required",
@@ -115,7 +112,6 @@ export const CheckoutForm = () => {
             toast.success("Платеж прошел!");
             saveOrder();
             dispatch(CLEAR_CART());
-            navigate("/order-history");
           }
         }
       });

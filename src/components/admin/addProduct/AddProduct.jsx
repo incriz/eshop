@@ -30,7 +30,6 @@ const initialState = {
   brand: "",
   desc: "",
 };
-
 export const AddProduct = () => {
   const { id } = useParams();
   const products = useSelector(selectProducts);

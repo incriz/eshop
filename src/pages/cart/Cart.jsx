@@ -23,8 +23,6 @@ export const Cart = () => {
   const cartTotalAmount = useSelector(selectCartTotalAmount);
   const isLoggedIN = useSelector(selectIsLoggedIn);
 
-  console.log(cartItems);
-
   const dispatch = useDispatch();
 
   const navigate = useNavigate();

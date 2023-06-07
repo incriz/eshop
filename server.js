@@ -7,10 +7,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("Добро пожаловать в Eshop");
-});
-
 let array = [];
 const calculateOrderAmount = items => {
   console.log(items);

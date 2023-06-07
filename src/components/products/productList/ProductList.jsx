@@ -45,11 +45,6 @@ export const ProductList = ({ products }) => {
             color="orangered"
             onClick={() => setGrid(true)}
           />
-          {/*  <FaRegListAlt*/}
-          {/*    size={24}*/}
-          {/*    color="#0066d4"*/}
-          {/*    onClick={() => setGrid(false)}*/}
-          {/*  />*/}
           <p>
             <b>{filteredProducts.length}</b>
           </p>

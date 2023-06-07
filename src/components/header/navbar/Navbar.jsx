@@ -33,7 +33,6 @@ export const Navbar = ({ showMenu, hideMenu }) => {
         } else {
           setDisplayName(user.displayName);
         }
-
         dispatch(
           SET_ACTIVE_USER({
             email: user.email,

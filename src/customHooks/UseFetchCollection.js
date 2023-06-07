@@ -9,7 +9,6 @@ export const UseFetchCollection = collectionName => {
 
   const getCollection = () => {
     setIsLoading(true);
-
     try {
       const docRef = collection(db, collectionName);
       const q = query(docRef, orderBy("createdAt", "desc"));
@@ -27,7 +26,6 @@ export const UseFetchCollection = collectionName => {
       toast.error(error.message);
     }
   };
-
   useEffect(() => {
     getCollection();
   }, []);
