@@ -7,7 +7,7 @@ import {
 } from "../../../redux/slice/filterSlice";
 import styles from "./productFilter.module.scss";
 
-export const ProductFilter = () => {
+export const ProductFilter = ({ hideMenuFilter }) => {
   const [category, setCategory] = useState("Все");
   const [price, setPrice] = useState(150000);
 
@@ -26,6 +26,7 @@ export const ProductFilter = () => {
   const filterProducts = cat => {
     setCategory(cat);
     dispatch(FILTER_BY_CATEGORY({ products, category: cat }));
+    hideMenuFilter();
   };
 
   return (

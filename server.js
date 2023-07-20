@@ -1,7 +1,9 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY);
+const stripe = require("stripe")(
+  "sk_test_51N1MHRCUF5lVnRDZMoK00f2Gy6rnesTUc1cmX1zSbdHJBpSSwjONmjs704orhYWeRd5fXzcavXMTvNHqmK2AG3Ki00uoTLeu8W"
+);
 
 const app = express();
 app.use(cors());
@@ -9,7 +11,6 @@ app.use(express.json());
 
 let array = [];
 const calculateOrderAmount = items => {
-  console.log(items);
   items.map(item => {
     const { price, cartQuantity } = item;
 
