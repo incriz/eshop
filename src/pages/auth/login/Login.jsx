@@ -1,18 +1,14 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import {
-  GoogleAuthProvider,
-  signInWithEmailAndPassword,
-  signInWithPopup,
-} from "firebase/auth";
-import { auth } from "../../../firebase/config";
+import React, {useState} from "react";
+import {Link, useNavigate} from "react-router-dom";
+import {GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup,} from "firebase/auth";
+import {auth} from "../../../firebase/config";
 import styles from "../auth.module.scss";
 import loginImg from "../../../assets/login.png";
-import { FaGoogle } from "react-icons/fa";
-import { Card, Loader } from "../../../components";
-import { toast } from "react-toastify";
-import { useSelector } from "react-redux";
-import { selectPreviousURL } from "../../../redux/slice/cartSlice";
+import {FaGoogle} from "react-icons/fa";
+import {Card, Loader} from "../../../components";
+import {toast} from "react-toastify";
+import {useSelector} from "react-redux";
+import {selectPreviousURL} from "../../../redux/slice/cartSlice";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
@@ -24,9 +20,9 @@ export const Login = () => {
 
   const redirectUser = () => {
     if (previousURL.includes("cart")) {
-      return navigate("/cart");
+      return navigate("/eshop/cart");
     }
-    navigate("/");
+    navigate("/eshop");
   };
 
   const loginUser = e => {
@@ -87,7 +83,7 @@ export const Login = () => {
                 Войти
               </button>
               <div className={styles.links}>
-                <Link to="/reset">Восстановить пароль</Link>
+                <Link to="/eshop/reset">Восстановить пароль</Link>
               </div>
               <p>-- или --</p>
             </form>
@@ -100,7 +96,7 @@ export const Login = () => {
             </button>
             <span className={styles.register}>
               <p>У вас нет учетной записи? </p>
-              <Link to="/register" style={{ color: "red" }}>
+              <Link to="/eshop/register" style={{ color: "red" }}>
                 Регистрация
               </Link>
             </span>

@@ -1,26 +1,18 @@
-import React, { useEffect, useState } from "react";
-import {
-  PaymentElement,
-  useElements,
-  useStripe,
-} from "@stripe/react-stripe-js";
+import React, {useEffect, useState} from "react";
+import {PaymentElement, useElements, useStripe,} from "@stripe/react-stripe-js";
 import styles from "./CheckoutForm.module.scss";
 import Card from "../card";
 import Loader from "../loader";
-import { toast } from "react-toastify";
+import {toast} from "react-toastify";
 import CheckoutSummary from "../checkoutSummary";
-import { useNavigate } from "react-router-dom";
-import { addDoc, collection, Timestamp } from "firebase/firestore";
-import { db } from "../../firebase/config";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  CLEAR_CART,
-  selectCartItems,
-  selectCartTotalAmount,
-} from "../../redux/slice/cartSlice";
-import { selectEmail, selectUserID } from "../../redux/slice/authSlice";
-import { selectShippingAddress } from "../../redux/slice/checkoutSlice";
-import { STORE_ORDERS } from "../../redux/slice/orderSlice";
+import {useNavigate} from "react-router-dom";
+import {addDoc, collection, Timestamp} from "firebase/firestore";
+import {db} from "../../firebase/config";
+import {useDispatch, useSelector} from "react-redux";
+import {CLEAR_CART, selectCartItems, selectCartTotalAmount,} from "../../redux/slice/cartSlice";
+import {selectEmail, selectUserID} from "../../redux/slice/authSlice";
+import {selectShippingAddress} from "../../redux/slice/checkoutSlice";
+import {STORE_ORDERS} from "../../redux/slice/orderSlice";
 
 export const CheckoutForm = () => {
   const stripe = useStripe();
@@ -78,7 +70,7 @@ export const CheckoutForm = () => {
       await addDoc(collection(db, "orders"), orderConfig);
       dispatch(CLEAR_CART());
       dispatch(STORE_ORDERS(orderConfig));
-      navigate("/cart");
+      navigate("/eshop/cart");
     } catch (error) {
       toast.error(error.message);
     }
@@ -96,7 +88,7 @@ export const CheckoutForm = () => {
       .confirmPayment({
         elements,
         confirmParams: {
-          return_url: "http://localhost:3000/checkout-success",
+          return_url: "http://localhost:3000/eshopcheckout-success",
         },
         redirect: "if_required",
       })

@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "../../../firebase/config";
-import { useDispatch, useSelector } from "react-redux";
+import React, {useEffect, useState} from "react";
+import {Link, useParams} from "react-router-dom";
+import {doc, getDoc} from "firebase/firestore";
+import {db} from "../../../firebase/config";
+import {useDispatch, useSelector} from "react-redux";
 import {
   ADD_TO_CART,
   CALCULATE_TOTAL_QUANTITY,
   DECREASE_TO_CART,
   selectCartItems,
 } from "../../../redux/slice/cartSlice";
-import { toast } from "react-toastify";
+import {toast} from "react-toastify";
 import styles from "./productDetails.module.scss";
 import Loader from "../../loader";
 
@@ -60,7 +60,7 @@ export const ProductDetails = () => {
       <div className={`container ${styles.product}`}>
         <h2>Информация о товаре</h2>
         <div>
-          <Link to="/#products">
+          <Link to="/eshop/#products">
             <button className="--btn --btn-primary">&larr; Назад</button>
           </Link>
         </div>

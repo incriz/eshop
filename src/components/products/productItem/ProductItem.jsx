@@ -1,8 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import styles from "./productItem.module.scss";
 import Card from "../../card";
-import { useDispatch, useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {
   ADD_TO_CART,
   CALCULATE_TOTAL_QUANTITY,
@@ -53,7 +53,7 @@ export const ProductItem = ({
 
   return (
     <Card cardClass={grid ? `${styles.grid}` : `${styles.list}`}>
-      <Link to={`/product-details/${id}`}>
+      <Link to={`/eshop/product-details/${id}`}>
         <div className={styles.img}>
           <img src={imageURL} alt={name} />
         </div>

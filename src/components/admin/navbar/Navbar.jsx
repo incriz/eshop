@@ -1,9 +1,9 @@
 import React from "react";
 import styles from "./navbar.module.scss";
-import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
-import { selectUserName } from "../../../redux/slice/authSlice";
-import { FaUserCircle } from "react-icons/fa";
+import {useSelector} from "react-redux";
+import {NavLink} from "react-router-dom";
+import {selectUserName} from "../../../redux/slice/authSlice";
+import {FaUserCircle} from "react-icons/fa";
 
 export const Navbar = () => {
   const userName = useSelector(selectUserName);
@@ -18,17 +18,17 @@ export const Navbar = () => {
       <nav>
         <ul>
           <li>
-            <NavLink to="/admin/all-products" className={activeLink}>
+            <NavLink to="/eshop/admin/all-products" className={activeLink}>
               Все товары
             </NavLink>
           </li>
           <li>
-            <NavLink to="/admin/add-product/ADD" className={activeLink}>
+            <NavLink to="/eshop/admin/add-product/ADD" className={activeLink}>
               Добавить товар
             </NavLink>
           </li>
           <li>
-            <NavLink to="/admin/orders" className={activeLink}>
+            <NavLink to="/eshop/admin/orders" className={activeLink}>
               Заказы
             </NavLink>
           </li>

@@ -1,18 +1,15 @@
-import React, { useEffect } from "react";
-import { deleteDoc, doc } from "firebase/firestore";
-import { deleteObject, ref } from "firebase/storage";
-import { db, storage } from "../../../firebase/config";
-import { Link } from "react-router-dom";
-import { Loader } from "../../../components";
-import { toast } from "react-toastify";
-import { useDispatch, useSelector } from "react-redux";
-import { UseFetchCollection } from "../../../customHooks/UseFetchCollection";
-import {
-  selectProducts,
-  STORE_PRODUCTS,
-} from "../../../redux/slice/productSlice";
+import React, {useEffect} from "react";
+import {deleteDoc, doc} from "firebase/firestore";
+import {deleteObject, ref} from "firebase/storage";
+import {db, storage} from "../../../firebase/config";
+import {Link} from "react-router-dom";
+import {Loader} from "../../../components";
+import {toast} from "react-toastify";
+import {useDispatch, useSelector} from "react-redux";
+import {UseFetchCollection} from "../../../customHooks/UseFetchCollection";
+import {selectProducts, STORE_PRODUCTS,} from "../../../redux/slice/productSlice";
 import Notiflix from "notiflix";
-import { FaEdit, FaTrashAlt } from "react-icons/fa";
+import {FaEdit, FaTrashAlt} from "react-icons/fa";
 import styles from "./viewProducts.module.scss";
 
 export const ViewProducts = () => {
@@ -101,7 +98,7 @@ export const ViewProducts = () => {
                     <td>{category}</td>
                     <td>{`${price}₽`}</td>
                     <td className={styles.icons}>
-                      <Link to={`/admin/add-product/${id}`}>
+                      <Link to={`/eshop/admin/add-product/${id}`}>
                         <FaEdit size={20} color="green" />
                       </Link>
                       &nbsp;

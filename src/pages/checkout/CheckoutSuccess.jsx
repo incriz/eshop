@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 
 export const CheckoutSuccess = () => {
   return (
@@ -10,7 +10,7 @@ export const CheckoutSuccess = () => {
         <br />
 
         <button className="--btn --btn-primary">
-          <Link to="/order-history">Посмотреть статус заказа</Link>
+          <Link to="/eshop/order-history">Посмотреть статус заказа</Link>
         </button>
       </div>
     </section>

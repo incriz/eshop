@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import styles from "./CheckoutDetails.module.scss";
-import { Card, CheckoutSummary } from "../../components";
-import { useDispatch } from "react-redux";
-import { SAVE_SHIPPING_ADDRESS } from "../../redux/slice/checkoutSlice";
-import { useNavigate } from "react-router-dom";
+import {Card, CheckoutSummary} from "../../components";
+import {useDispatch} from "react-redux";
+import {SAVE_SHIPPING_ADDRESS} from "../../redux/slice/checkoutSlice";
+import {useNavigate} from "react-router-dom";
 
 const initialAddressState = {
   name: "",
@@ -33,7 +33,7 @@ export const CheckoutDetails = () => {
   const handleSubmit = e => {
     e.preventDefault();
     dispatch(SAVE_SHIPPING_ADDRESS(shippingAddress));
-    navigate("/checkout");
+    navigate("/eshop/checkout");
   };
 
   return (

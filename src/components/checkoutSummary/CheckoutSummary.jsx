@@ -1,12 +1,8 @@
 import React from "react";
 import styles from "./CheckoutSummary.module.scss";
-import { useSelector } from "react-redux";
-import {
-  selectCartItems,
-  selectCartTotalAmount,
-  selectCartTotalQuantity,
-} from "../../redux/slice/cartSlice";
-import { Link } from "react-router-dom";
+import {useSelector} from "react-redux";
+import {selectCartItems, selectCartTotalAmount, selectCartTotalQuantity,} from "../../redux/slice/cartSlice";
+import {Link} from "react-router-dom";
 import Card from "../card";
 
 export const CheckoutSummary = () => {
@@ -21,7 +17,7 @@ export const CheckoutSummary = () => {
           <>
             <p>Нет товаров в корзине</p>
             <button className="--btn --btn-primary">
-              <Link to="/#products">Список товаров</Link>
+              <Link to="/eshop/#products">Список товаров</Link>
             </button>
           </>
         ) : (

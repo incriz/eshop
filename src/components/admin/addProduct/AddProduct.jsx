@@ -1,18 +1,13 @@
-import { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import {
-  deleteObject,
-  getDownloadURL,
-  ref,
-  uploadBytesResumable,
-} from "firebase/storage";
-import { addDoc, collection, doc, setDoc, Timestamp } from "firebase/firestore";
-import { db, storage } from "../../../firebase/config";
-import { useSelector } from "react-redux";
-import { selectProducts } from "../../../redux/slice/productSlice";
-import { Card, Loader } from "../../../components";
+import {useState} from "react";
+import {useNavigate, useParams} from "react-router-dom";
+import {deleteObject, getDownloadURL, ref, uploadBytesResumable,} from "firebase/storage";
+import {addDoc, collection, doc, setDoc, Timestamp} from "firebase/firestore";
+import {db, storage} from "../../../firebase/config";
+import {useSelector} from "react-redux";
+import {selectProducts} from "../../../redux/slice/productSlice";
+import {Card, Loader} from "../../../components";
 import styles from "./addProducts.module.scss";
-import { toast } from "react-toastify";
+import {toast} from "react-toastify";
 
 const categories = [
   { id: 1, name: "Компьютеры" },
@@ -61,7 +56,7 @@ export const AddProduct = () => {
     const file = e.target.files[0];
     // console.log(file);
 
-    const storageRef = ref(storage, `eshop/${Date.now()}${file.name}`);
+    const storageRef = ref(storage, `/eshop/${Date.now()}${file.name}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
 
     uploadTask.on(
@@ -102,7 +97,7 @@ export const AddProduct = () => {
       setUploadProgress(0);
       setProduct({ ...initialState });
 
-      navigate("/admin/all-products");
+      navigate("/eshop/admin/all-products");
 
       toast.success("Товар добавлен");
     } catch (error) {
@@ -134,7 +129,7 @@ export const AddProduct = () => {
 
       setIsLoading(false);
       toast.success("Товар изменен");
-      navigate("/admin/all-products");
+      navigate("/eshop/admin/all-products");
     } catch (error) {
       setIsLoading(false);
       toast.error(error.message);

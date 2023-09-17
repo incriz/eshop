@@ -1,16 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { loadStripe } from "@stripe/stripe-js";
-import { Elements } from "@stripe/react-stripe-js";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  CALCULATE_TOTAL_QUANTITY,
-  selectCartItems,
-  selectCartTotalAmount,
-} from "../../redux/slice/cartSlice";
-import { selectEmail } from "../../redux/slice/authSlice";
-import { selectShippingAddress } from "../../redux/slice/checkoutSlice";
-import { toast } from "react-toastify";
-import { CheckoutForm, Loader } from "../../components";
+import React, {useEffect, useState} from "react";
+import {loadStripe} from "@stripe/stripe-js";
+import {Elements} from "@stripe/react-stripe-js";
+import {useDispatch, useSelector} from "react-redux";
+import {CALCULATE_TOTAL_QUANTITY, selectCartItems, selectCartTotalAmount,} from "../../redux/slice/cartSlice";
+import {selectEmail} from "../../redux/slice/authSlice";
+import {selectShippingAddress} from "../../redux/slice/checkoutSlice";
+import {toast} from "react-toastify";
+import {CheckoutForm, Loader} from "../../components";
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PK);
 
@@ -55,7 +51,7 @@ export const Checkout = () => {
       })
       .catch(error => {
         setMessage("Ошибка при инициализации оплаты!");
-        toast.error("Что-то пошло не так...");
+        toast.error("Нужно запустить сервер, чтоб отобразилась страница оплаты!");
       });
   }, []);
 

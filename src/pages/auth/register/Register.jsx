@@ -1,12 +1,12 @@
-import { useState } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { Card, Loader } from "../../../components";
-import { Link, useNavigate } from "react-router-dom";
+import {useState} from "react";
+import {createUserWithEmailAndPassword} from "firebase/auth";
+import {Card, Loader} from "../../../components";
+import {Link, useNavigate} from "react-router-dom";
 import styles from "../auth.module.scss";
 import registerImg from "../../../assets/register.png";
-import { toast, ToastContainer } from "react-toastify";
+import {toast, ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { auth } from "../../../firebase/config";
+import {auth} from "../../../firebase/config";
 
 export const Register = () => {
   const [email, setEmail] = useState("");
@@ -33,7 +33,7 @@ export const Register = () => {
         console.log(user);
         setIsLoading(false);
         toast.success("Регистрация прошла успешно!");
-        navigate("/login");
+        navigate("/eshop/login");
       })
       .catch(error => {
         toast.error(error.message);
@@ -77,7 +77,7 @@ export const Register = () => {
             </form>
             <span className={styles.register}>
               <p>У вас есть аккаунт?</p>
-              <Link to="/login" style={{ color: "red" }}>
+              <Link to="/eshop/login" style={{ color: "red" }}>
                 Войти
               </Link>
             </span>

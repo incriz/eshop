@@ -1,11 +1,11 @@
-import { Link } from "react-router-dom";
-import { Card, Loader } from "../../../components";
-import { useState } from "react";
-import { sendPasswordResetEmail } from "firebase/auth";
-import { auth } from "../../../firebase/config";
+import {Link} from "react-router-dom";
+import {Card, Loader} from "../../../components";
+import {useState} from "react";
+import {sendPasswordResetEmail} from "firebase/auth";
+import {auth} from "../../../firebase/config";
 import resetImg from "../../../assets/forgot.png";
 import styles from "../auth.module.scss";
-import { toast } from "react-toastify";
+import {toast} from "react-toastify";
 
 export const Reset = () => {
   const [email, setEmail] = useState("");
@@ -51,10 +51,10 @@ export const Reset = () => {
               </button>
               <div className={styles.links}>
                 <p>
-                  <Link to="/login">- Login</Link>
+                  <Link to="/eshop/login">- Login</Link>
                 </p>{" "}
                 <p>
-                  <Link to="/register">- Register</Link>
+                  <Link to="/eshop/register">- Register</Link>
                 </p>
               </div>
             </form>

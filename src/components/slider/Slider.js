@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import "./Slider.scss";
-import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
-import { sliderData } from "./slider-data";
+import {AiOutlineArrowLeft, AiOutlineArrowRight} from "react-icons/ai";
+import {sliderData} from "./slider-data";
 
 export const Slider = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -52,7 +52,7 @@ export const Slider = () => {
                   <h2>{heading}</h2>
                   <p>{desc}</p>
                   <hr />
-                  <a href="#product" className="--btn --btn-primary">
+                  <a href="/eshop#product" className="--btn --btn-primary">
                     Shop now
                   </a>
                 </div>

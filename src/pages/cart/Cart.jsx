@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React, {useEffect} from "react";
 import styles from "./Cart.module.scss";
-import { useDispatch, useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {
   ADD_TO_CART,
   CALCULATE_SUBTOTAL,
@@ -12,11 +12,11 @@ import {
   selectCartItems,
   selectCartTotalAmount,
 } from "../../redux/slice/cartSlice";
-import { selectIsLoggedIn } from "../../redux/slice/authSlice";
-import { Link, useNavigate } from "react-router-dom";
-import { FaTrashAlt } from "react-icons/fa";
-import { BiMinus, BiPlus } from "react-icons/bi";
-import { Card } from "../../components";
+import {selectIsLoggedIn} from "../../redux/slice/authSlice";
+import {Link, useNavigate} from "react-router-dom";
+import {FaTrashAlt} from "react-icons/fa";
+import {BiMinus, BiPlus} from "react-icons/bi";
+import {Card} from "../../components";
 
 export const Cart = () => {
   const cartItems = useSelector(selectCartItems);
@@ -52,10 +52,10 @@ export const Cart = () => {
 
   const checkout = () => {
     if (isLoggedIN) {
-      navigate("/checkout-details");
+      navigate("/eshop/checkout-details");
     } else {
       dispatch(SAVE_URL(url));
-      navigate("/login");
+      navigate("/eshop/login");
     }
   };
 
@@ -69,7 +69,7 @@ export const Cart = () => {
             <br />
             <div>
               <button className="--btn --btn-primary">
-                <Link to="/#products">&larr; Список товаров</Link>
+                <Link to="/eshop/#products">&larr; Список товаров</Link>
               </button>
             </div>
           </>
@@ -137,7 +137,7 @@ export const Cart = () => {
             </table>
             <div className={styles.summary}>
               <div>
-                <Link to="/#products">
+                <Link to="/eshop/#products">
                   <button className="--btn --btn-primary">&larr; Назад</button>
                 </Link>
                 <button className="--btn --btn-danger" onClick={clearCart}>
