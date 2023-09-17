@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Product.module.scss";
 import ProductFilter from "../productFilter";
 import ProductList from "../productList";
@@ -14,6 +14,8 @@ import { HiOutlineSortDescending } from "react-icons/hi";
 export const Product = () => {
   const { data, isLoading } = UseFetchCollection("products");
 
+  const [showFilter, setShowFiler] = useState(false);
+
   const products = useSelector(selectProducts);
   const dispatch = useDispatch();
 
@@ -25,19 +27,34 @@ export const Product = () => {
     );
   }, [dispatch, data]);
 
+  const toggleFilter = () => {
+    setShowFiler(!showFilter);
+  };
+
+  const hideMenuFilter = () => {
+    setShowFiler(false);
+  };
+
   return (
     <section>
       <div className={`container ${styles.product}`}>
-        <aside className={`${styles.filter}`}>
-          {isLoading ? null : <ProductFilter />}
+        <aside
+          className={
+            showFilter ? `${styles.filter} ${styles.show}` : `${styles.filter}`
+          }
+        >
+          {isLoading ? null : <ProductFilter hideMenuFilter={hideMenuFilter} />}
         </aside>
         <div className={styles.content}>
           {isLoading ? <Loader /> : <ProductList products={products} />}
           {isLoading ? (
             <Loader />
           ) : (
-            <div className={styles.icon}>
+            <div className={styles.icon} onClick={toggleFilter}>
               <HiOutlineSortDescending size={30} color="orangered" />
+              <p>
+                <b>{showFilter ? "Каталог" : "Каталог"}</b>
+              </p>
             </div>
           )}
         </div>
